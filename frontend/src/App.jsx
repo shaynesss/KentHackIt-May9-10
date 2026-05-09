@@ -88,28 +88,39 @@ function scoreMessage(s) {
   return "You're gonna make it!"
 }
 
-// SVG semicircle gauge — flat edge at bottom, orange arc from left to right
 function Gauge({ score }) {
-  // M 20 100 A 80 80 0 0 0 180 100  →  CCW arc over the top, total length = π×80
-  const arcLen = Math.PI * 80
-  const filled = (Math.min(100, Math.max(0, score)) / 100) * arcLen
+  const radius = 70
+  const circumference = Math.PI * radius
+  const filled = (Math.min(100, Math.max(0, score)) / 100) * circumference
+
   return (
-    <svg viewBox="0 0 200 105" style={{ width: '100%', maxWidth: 200 }}>
+    <svg viewBox="0 0 200 120" style={{ width: '100%', maxWidth: 220 }}>
       <path
-        d="M 20 100 A 80 80 0 0 0 180 100"
+        d="M 20 100 A 80 80 0 0 1 180 100"
         strokeWidth={16}
-        stroke="var(--border)"
+        stroke="#e5e7eb"
         fill="none"
         strokeLinecap="round"
       />
       <path
-        d="M 20 100 A 80 80 0 0 0 180 100"
+        d="M 20 100 A 80 80 0 0 1 180 100"
         strokeWidth={16}
-        stroke="#f59e0b"
+        stroke="#f97316"
         fill="none"
         strokeLinecap="round"
-        strokeDasharray={`${filled} ${arcLen}`}
+        strokeDasharray={`${filled} ${circumference}`}
+        strokeDashoffset={0}
       />
+      <text
+        x="100" y="95"
+        textAnchor="middle"
+        fontSize="24"
+        fontWeight="700"
+        fill="currentColor"
+        fontFamily="system-ui"
+      >
+        {score}%
+      </text>
     </svg>
   )
 }
