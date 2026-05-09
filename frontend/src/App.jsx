@@ -484,12 +484,15 @@ export default function App() {
                   }}>
                     Constructive Feedback
                   </div>
-                  <ul style={{ paddingLeft: '1.2rem', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                    {result.priority_fixes.map((fix, i) => (
-                      <li key={i} style={{ fontSize: '0.9rem', lineHeight: 1.5, color: 'var(--text)' }}>
-                        {fix}
-                      </li>
-                    ))}
+                  <ul style={{ paddingLeft: '1.2rem', display: 'flex', flexDirection: 'column', gap: '0.5rem', listStyleType: 'disc' }}>
+                    {Array.isArray(result.priority_fixes)
+                      ? result.priority_fixes.map((fix, i) => (
+                          <li key={i} style={{ fontSize: '0.9rem', lineHeight: 1.5, color: 'var(--text)' }}>
+                            {fix}
+                          </li>
+                        ))
+                      : <li>{result.priority_fixes}</li>
+                    }
                   </ul>
                 </div>
 
