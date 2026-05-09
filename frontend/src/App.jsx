@@ -128,7 +128,7 @@ function Header({ onReset, theme, onToggleTheme }) {
         display: 'flex', alignItems: 'center', gap: '0.35rem',
         fontSize: '1rem', fontWeight: 700, color: 'var(--text)',
       }}>
-        🔥 <span>AI GMI?</span>
+        <img src="/logo.png" alt="AI GMI" style={{ height: '40px', width: 'auto' }} />
       </button>
       <button onClick={onToggleTheme} style={{
         background: 'none', border: '1px solid var(--border)',
@@ -159,11 +159,11 @@ export default function App() {
     localStorage.setItem('theme', theme)
   }, [theme])
 
-  // Splash: fade at 1.5s, switch page at 2s
+  // Splash: fade at 3s, switch page at 3.5s
   useEffect(() => {
     if (page !== 1) return
-    const t1 = setTimeout(() => setFading(true), 1500)
-    const t2 = setTimeout(() => setPage(2), 2000)
+    const t1 = setTimeout(() => setFading(true), 3000)
+    const t2 = setTimeout(() => setPage(2), 3500)
     return () => { clearTimeout(t1); clearTimeout(t2) }
   }, [page])
 
@@ -211,10 +211,7 @@ export default function App() {
 
   // ── Derived values for results page ────────────────────────────────────
 
-  const score    = result ? Math.round(result.overall_score * 10) : 0
-  const feedback = result && Array.isArray(result.priority_fixes)
-    ? result.priority_fixes.join('. ')
-    : ''
+  const score = result ? Math.round(result.overall_score * 10) : 0
 
   // ─────────────────────────────────────────────────────────────────────────
 
@@ -253,6 +250,10 @@ export default function App() {
           from { opacity: 0; transform: translateY(28px); }
           to   { opacity: 1; transform: translateY(0); }
         }
+        @keyframes pulse {
+          0%, 100% { opacity: 1; transform: scale(1); }
+          50%       { opacity: 0.6; transform: scale(0.96); }
+        }
       `}</style>
 
       <div style={{ maxWidth: 480, margin: '0 auto', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
@@ -263,7 +264,11 @@ export default function App() {
             flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center',
             opacity: fading ? 0 : 1, transition: 'opacity 0.45s ease',
           }}>
-            <span style={{ fontSize: '5rem', animation: 'slideUp 0.55s ease forwards' }}>🔥</span>
+            <img
+              src="/logo.png"
+              alt="AI GMI"
+              style={{ height: '160px', width: 'auto', animation: 'slideUp 0.55s ease forwards' }}
+            />
           </div>
         )}
 
@@ -418,6 +423,11 @@ export default function App() {
                 flex: 1, display: 'flex', flexDirection: 'column',
                 alignItems: 'center', justifyContent: 'center', gap: '2rem',
               }}>
+                <img
+                  src="/logo.png"
+                  alt="AI GMI"
+                  style={{ height: '80px', width: 'auto', animation: 'pulse 2s ease-in-out infinite' }}
+                />
                 <h1 style={{ fontSize: '2rem', fontWeight: 700 }}>Generating...</h1>
                 <img
                   src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif"
@@ -474,9 +484,13 @@ export default function App() {
                   }}>
                     Constructive Feedback
                   </div>
-                  <p style={{ fontSize: '0.9rem', lineHeight: 1.65, color: 'var(--text)' }}>
-                    {feedback}
-                  </p>
+                  <ul style={{ paddingLeft: '1.2rem', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                    {result.priority_fixes.map((fix, i) => (
+                      <li key={i} style={{ fontSize: '0.9rem', lineHeight: 1.5, color: 'var(--text)' }}>
+                        {fix}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
 
                 {/* Audio controls */}
