@@ -1,0 +1,17 @@
+INFO:     Started server process [2172]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+GEMINI_API_KEY: AIzaSyDG...
+INFO:     127.0.0.1:47952 - "GET / HTTP/1.1" 200 OK
+INFO:     129.12.152.37:58785 - "GET / HTTP/1.1" 200 OK
+INFO:     129.12.152.37:58785 - "GET /favicon.ico HTTP/1.1" 404 Not Found
+INFO:     129.12.223.53:58475 - "GET / HTTP/1.1" 200 OK
+INFO:     129.12.223.53:58486 - "GET / HTTP/1.1" 200 OK
+INFO:     129.12.223.53:50083 - "GET /favicon.ico HTTP/1.1" 404 Not Found
+INFO:     129.12.223.53:50083 - "GET /favicon.ico HTTP/1.1" 404 Not Found
+INFO:     129.12.223.53:58509 - "POST /grade-text HTTP/1.1" 200 OK
+INFO:     129.12.223.53:58509 - "GET /static/roast.mp3?t=1778348785627 HTTP/1.1" 206 Partial Content
+INFO:     129.12.223.53:58509 - "GET /static/roast.mp3?t=1778348785627 HTTP/1.1" 206 Partial Content
+INFO:     129.12.223.53:58509 - "GET /favicon.ico HTTP/1.1" 404 Not Found
+INFO:     129.12.152.37:58993 - "POST /grade HTTP/1.1" 200 OK
