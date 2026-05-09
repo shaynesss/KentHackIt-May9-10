@@ -3,6 +3,7 @@ import os
 
 import pdfplumber
 from fastapi import FastAPI, File, Form, UploadFile
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 
@@ -10,6 +11,14 @@ from pipeline import run_pipeline
 from voice import generate_roast_audio
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
 HTML = """<!DOCTYPE html>
@@ -390,3 +399,6 @@ async def grade_text(cv_text: str = Form(...), industry: str = Form(...)):
         return JSONResponse(status_code=500, content={"detail": str(e)})
 
     return result
+
+
+app.mount("/", StaticFiles(directory="frontend/dist", html=True), name="frontend")
