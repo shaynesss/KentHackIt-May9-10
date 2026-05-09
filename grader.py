@@ -36,6 +36,7 @@ def grade_cv(cv_text: str, industry: str) -> dict:
   "issues": [string],
   "priority_fixes": [string]
 }}
+priority_fixes must be exactly 3-5 short punchy bullet points. Each must: start with an action verb, be specific to this CV, be max 15 words, and tell the candidate exactly what to do or remove. Examples: "Add metrics to every bullet point", "Remove Duke of Edinburgh — you graduated in 2024", "Rewrite summary — it reads like a LinkedIn buzzword generator".
 Grade relative to a penultimate or final year undergraduate applying for internships, not an experienced professional."""
 
     try:
